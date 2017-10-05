@@ -1,0 +1,1 @@
+@include("components.toggle",["id"=>"is_trip","name"=>"is_trip","dataon"=>__('orders.trip'),"dataoff"=>__('orders.not_trip'),"function"=>"isTrip(state)"])
