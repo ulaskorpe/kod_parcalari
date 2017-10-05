@@ -15,6 +15,8 @@
         ///dead
 
 
+
+
           /*      $d_adi = $dosya->getClientOriginalName();
                 $uzanti = $dh->uzantiBul($d_adi);
                 $d_adi = str_replace('.' . $uzanti, '', $d_adi);
