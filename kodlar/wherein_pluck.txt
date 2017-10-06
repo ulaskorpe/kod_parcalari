@@ -1,0 +1,20 @@
+     $dizi=UserWorkTemplate::distinct()->select('user_id')->pluck('user_id');
+       $users=$user->where('role_id','=',$role_id)
+            ->wherenotin('id',$dizi)
+            ->get();
+
+
+	public function order() {
+
+		return $this->belongsTo('App\Models\Order');
+	}
+
+	public function driver() {
+
+		return $this->belongsTo('App\Models\Driver');
+	}
+
+	public function vehicleclass() {
+
+		return $this->belongsTo('App\Models\VehicleClass','vehicle_class_id');
+	}

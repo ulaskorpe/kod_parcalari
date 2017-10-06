@@ -1,0 +1,14 @@
+ $model = Job::where('jobs.id','!=',0)->join('orders','jobs.order_id','=','orders.id')
+            ->wherein('orders.id',$orderArray)
+            ->whereBetween('orders.start_time', [$filterstartdate . ' 00:00:00', $filterenddate . ' 23:59:59'])
+            ->with('order.package')->get();
+
+
+
+/*
+        $model = Order::with('client.favoritedrivers', 'package', 'jobs','jobs.driver','jobs.driver.user')
+           ->whereBetween('orders.start_time', [$filterstartdate . ' 00:00:00', $filterenddate . ' 23:59:59'])
+          //  ->wherein('id',$orderArray)
+            ->orderBy('id', 'desc')
+            ->get();
+*/

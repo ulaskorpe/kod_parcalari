@@ -1,0 +1,30 @@
+ public function timetable(Request $request)
+    {
+
+
+        $date = $request->input('date');
+
+        $date = $date ? $date : date("Y-m-d");
+
+        $groupedjobs =
+            Job::with('order.client.user', 'order.package', 'driver.user')
+                ->join('orders', 'jobs.order_id', '=', 'orders.id')
+                ->join('packages', 'packages.id', '=', 'orders.package_id')
+                ->whereBetween('start_time', [$date . ' 00:00:00', $date . ' 23:59:59'])
+                ->get([  DB::raw("IF(driver_id = 2147483647 ,'orange',IF(isaccepted=0,'dodgerblue','green'))  AS color"),'orders.start_time as start_date', DB::raw("orders.start_time + INTERVAL orders.duration MINUTE  AS end_date"),DB::raw("CONCAT(packages.name,' ',orders.duration)  AS text"),'driver_id as section_id','jobs.id as jobid','orders.package_id']);
+
+
+        $model=new \stdClass();
+        $drivers=Driver::with('user')
+            ->join('users', 'users.id', '=', 'drivers.user_id')
+            ->get(['drivers.id AS key', DB::raw("CONCAT(users.name,' ',users.last_name)  AS label")])->toArray();
+
+        array_unshift($drivers, ['key'=>2147483647,'label'=>"Unassigned","user"=>null]);
+        $model->drivers=json_encode($drivers);
+        $model->jobs=str_replace(':null',':""',json_encode($groupedjobs));
+        $model->date=Carbon::now()->addHour(1)->toDateTimeString();
+        return view('themes.' . static::$tf . '.manager.order.timetable', [
+            'model' => $model,
+            'date' => $date
+        ]);
+    }

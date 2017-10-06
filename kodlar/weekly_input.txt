@@ -1,0 +1,67 @@
+ @if(false)
+            <div class="col-sm-3">
+
+                <div class="row" style="height: 100px;">&nbsp;</div>
+                <form class="form" id="add-vehicle" action="{{ route('manager.department.workcreate') }}"
+                      method="post" enctype="multipart/form-data">
+                    {{csrf_field()}}
+
+
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+
+                    <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
+                    <input type="hidden" name="work_id" id="work_id" value="">
+
+
+
+                    <label for="start_at"> Start At </label>
+                    <div class="input-group">
+
+                        <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" class="form-control datepicker-default" id="start_at" name="start_at" value="{{old('start_at')}}" />
+
+
+
+                    </div>
+
+
+                    <label for="start_at"> End At </label>
+                    <div class="input-group">
+
+                        <span class="input-group-addon"><i class="icon-calendar3"></i></span>
+                        <input type="text" class="form-control datepicker-default" id="end_at" name="end_at" value="{{old('end_at')}}" />
+
+
+
+
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <label for="company_address">Description</label>
+                        <input type="text" id="description" class="form-control"
+                               name="description"
+                               placeholder="Description" value="{{ old('description') }}"/>
+                    </div>
+
+
+                    <div class="form-actions">
+                        <button class="btn btn-danger pull-right" type="submit">
+                            <i class="icon-check"></i> Create New Work</button>
+                    </div>    </form>
+            </div>
+
+
+        @endif

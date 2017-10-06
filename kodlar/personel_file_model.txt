@@ -1,0 +1,13 @@
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+//use App\Models\Personel;
+class Personel_File extends Model
+{
+    public function getPersonel(){
+      /// return Personel::where('id',$this->personel_id)->first()->personel_name;
+    }
+
+    protected $table = 'personel_file';
+    protected $fillable = ['description','file','date','personel_id'];
+}

@@ -1,0 +1,65 @@
+public function uploadfile(Request $gelenler){
+    $user_id = $gelenler->input('user_id');
+
+    $file_id=$gelenler->input('file_id');
+
+$user=User::where('id','=',$user_id)->first();
+$izinliDizi=array('doc','docx','xls','xlsx','pdf','txt','png');
+
+
+
+
+if(empty($file_id)){
+
+    $dosyalar=$gelenler->file('files');
+    if(!empty($dosyalar)){
+       // $path='../../../public/user_files';
+        foreach($dosyalar as $dosya){
+            $d_adi=$dosya->getClientOriginalName();
+            $dosya_adi=$this->fixetiket($d_adi);
+            $uzanti=$this->uzantiBul($d_adi);
+            if(in_array($uzanti,$izinliDizi)){
+                Storage::put($dosya_adi,file_get_contents($dosya));
+
+                $d_adi=str_replace('.'.$uzanti,'',$d_adi);
+                $description = (!empty($gelenler->input('description')))?$gelenler->input('description'):date('d.m.Y').' dated file for '.$user->name.' '.$user->last_name.":".$d_adi;
+                UserFile::insert(['description'=>$description,'file'=>$dosya_adi,'user_id'=>$user_id,'date'=>date('d.m.Y H:i')]);
+
+            }///izinli
+        }///foreach
+    }////!empty
+
+}else{
+
+    $file=UserFile::where('id','=',$file_id)->first();
+    $eski_dosya_adi=$file->file;
+
+    if($file->user_id==$user->id){
+        $dosyalar=$gelenler->file('files');
+        if(!empty($dosyalar)){
+            foreach($dosyalar as $dosya) {
+                $d_adi = $dosya->getClientOriginalName();
+                $dosya_adi = $this->fixetiket($d_adi);
+                $uzanti = $this->uzantiBul($d_adi);
+                if (in_array($uzanti, $izinliDizi)) {
+                    Storage::put($dosya_adi, file_get_contents($dosya));
+                    $d_adi = str_replace('.' . $uzanti, '', $d_adi);
+                    $description = (!empty($gelenler->input('description'))) ? $gelenler->input('description') : date('d.m.Y') . ' dated file for ' . $user->name . ' ' . $user->last_name . ":" . $d_adi;
+                }
+            }///foreach
+        }////dosya gelmiþ
+
+    }else{
+        return null;
+    }
+
+
+}
+
+    return redirect()->route('manager.department.files',['id'=>$user_id]);
+
+
+
+
+
+}/////uploadfile

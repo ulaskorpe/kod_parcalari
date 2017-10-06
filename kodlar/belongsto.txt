@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+
+class UserFile extends Model
+{
+
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
+
+    public function user(){
+        /// return Personel::where('id',$this->personel_id)->first()->personel_name;
+        return $this->belongsTo('App\User');
+    }
+
+    protected $table = 'user_file';
+    protected $fillable = ['description','file','date','user_id'];
+}

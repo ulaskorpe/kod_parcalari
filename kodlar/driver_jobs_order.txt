@@ -1,0 +1,26 @@
+     $driverCompany = DriverCompany::with([ 'drivers.jobs.order'])
+            ->where('user_id','=',\Auth::id())
+            ->first();
+
+
+driverCompany  model
+
+    public function drivers()
+    {
+        return $this->hasMany('App\Models\Driver');
+    }
+
+
+driver model
+
+    public function jobs()
+    {
+        return $this->hasMany(Job::class);
+    }
+
+Job model
+
+	public function order() {
+
+		return $this->belongsTo('App\Models\Order');
+	}

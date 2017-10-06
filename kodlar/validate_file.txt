@@ -1,0 +1,46 @@
+
+        $messages=[
+            /*hata msglarý
+                    'start_at.required'=>'boþ olmuyo',
+                    'end_at.required'=>'bitiþ tarihi boþ olmaz',
+                    'end_at.after'=>'bitiþ baþlangýçtan önce olmaz'*/
+        ];
+
+        $kontrol = Validator::make($gelenler->all(),array(
+            'first_name' => 'required|min:3',
+            'last_name' => 'required|min:3',
+            'gender' => 'required',
+            'birth_date' => 'required|date',
+            'svnr'=>'required|numeric',
+            'licensenumber'=>'required|numeric',
+            'license_date' => 'required|date',
+            'phone_number_country_code'=>'required|numeric',
+            //'phone_number'=>'required|numeric',
+            'email' => 'required|email',
+            'photo'=>'image'
+            //'description' => 'required'
+        ),$messages);
+
+ if(!empty($varmi->id)){
+            $kontrol->errors()->add('end_at','There is another work assigned for user between given dates');////custom error msg
+        }
+
+
+if($kontrol->fails()){
+
+
+
+ // $hataSay=count($kontrol->errors());
+ return redirect()->route('manager.department.create', array('role_id'=>$gelenler->input('role_id')))->withErrors($kontrol)->withInput();
+
+view tarafý ::: 
+
+        @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif

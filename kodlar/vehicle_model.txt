@@ -1,0 +1,12 @@
+class Vehicle extends Model {
+
+	public function vehiclemodel() {
+
+		return $this->belongsTo('App\Models\VehicleModel', 'vehicle_model_id');
+	}
+
+	public function vehicleclass() {
+
+		return $this->belongsTo('App\Models\VehicleClass', 'vehicle_class_id');
+	}
+}

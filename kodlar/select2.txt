@@ -1,0 +1,28 @@
+        <div class="col-md-9" >
+                                                <select class="js-example-basic-multiple" multiple="multiple"  name="private_users[]" id="private_users[]">
+
+                                                    <option value=""></option>
+                                                    @foreach($clients as $client)
+                                                        <option value="{{$client->id}}" @if(in_array($client->id,$users))selected @endif>
+                                                            @if(!empty($client->company_name))  [ {{$client->company_name}}  ] @endif {{$client->user->fullname()}}
+
+                                                        </option>
+                                                    @endforeach
+
+                                                </select>
+                                            </div>
+
+
+
+  $(".js-example-basic-multiple").select2();
+
+
+        $clients=Client::with(['user'])->orderBy('company_name')->get();
+		return view('themes.' . static::$tf . '.manager.package.update', [
+			'model' => $Package,
+			'classes' => VehicleClass::all(),
+			'prices' => $prices,
+			'classprices' => VehicleClassPrice::where('package_id', $id),
+          'clients' => $clients,
+            'users'=>$users
+		]);

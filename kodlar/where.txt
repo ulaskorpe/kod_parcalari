@@ -1,0 +1,4 @@
+   $VehicleClassPrice = VehicleClassPrice::where([
+                ['vehicle_class_id', '=', $vehicleclassid],
+                ['package_id', '=', $packageid]
+            ])->first();

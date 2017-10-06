@@ -1,0 +1,63 @@
+@extends('themes.robust.layouts.default')
+
+@section('pageTitle', trans('pageTitle.opRecover'))
+@section('metaDescription', '...')
+@section('metaKeywords', '...')
+
+@section('cssParts')
+
+@stop
+
+@section('content-body')
+
+@stop
+
+@section('scriptParts')
+    <!-- Modal -->
+    <div class="modal fade text-xs-left" id="modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger white">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="modal-title">Delete Process</h4>
+                </div>
+                <div class="modal-body" id="modal-body">
+
+
+                    
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-danger" id="confirm-danger" data-id="">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#clients').DataTable({
+                searchable: true
+            });
+            var href;
+            $('a.delete').click(function (event) {
+                event.preventDefault();
+                href = $(this).attr('href');
+                var row = $(this).parents('tr').attr('id');
+                $('#modal #modal-title').html("You Sure?");
+                $('#modal #modal-body').html("Are You Sure?");
+                $("#modal").modal('show');
+            });
+            $('#confirm-danger').click(function (event) {
+
+                window.location = href;
+            });
+        });
+    </script>
+    <!-- END PAGE LEVEL JS-->
+@stop

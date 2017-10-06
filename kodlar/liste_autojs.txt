@@ -1,0 +1,114 @@
+@extends('themes.robust.layouts.default')
+
+@section('pageTitle', trans($title))
+@section('metaDescription', '...')
+@section('metaKeywords', '...')
+
+@section('cssParts')
+
+@stop
+@section('content-body')
+
+    <div class="col-xs-12">
+        <div class="card">
+            <div class="card-head">
+                <div class="card-header">
+                    <h4 class="card-title">{{$title}}</h4>
+                    <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                    <div class="heading-elements">
+                        <a href="{{route( 'manager.department.departmentForm') }}">
+                            <button type="button" class="btn btn-primary btn-sm"><i class="icon-plus4 white"></i>
+                                Create User
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body collapse in">
+                <div class="card-block">
+                    <!-- Task List table -->
+                    <table id="clients"
+                           class="table table-white-space table-bordered row-grouping display table-responsive no-wrap icheck table-middle">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Display Name</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($users as $user)
+                            <tr id="client-row-{{ $user->id }}">
+                                <td>{{ $user->id }}</td>
+                                <td>
+                                    <div class="media">
+                                        <div class="media-body media-middle">
+                                            {{ $user->name." ".$user->last_name }}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="media">
+                                        <div class="media-body media-middle">
+                                            {{ $user->email }}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="{{ route('manager.vehiclebrand.edit', $user->id) }}"
+                                       class="btn btn-float btn-warning btn-sm">
+                                        <i class="icon-outbox"></i>
+                                        <span></span>
+                                    </a>
+                                    <a href="{{ route('manager.vehiclebrand.edit', $user->id) }}"
+                                       class="btn btn-float btn-info">
+                                        <i class="icon-eye"></i>
+                                        <span></span>
+                                    </a>
+                                    <a href="{{ route('manager.vehiclebrand.delete', $user->id) }}"
+                                       class="btn btn-float btn-sm btn-danger delete">
+                                        <i class="icon-cross2"></i>
+                                        <span></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+@stop
+
+@section('scriptParts')
+    <!-- Modal -->
+
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#clients').DataTable({
+                searchable: true
+            });
+            var href;
+            $('a.delete').click(function (event) {
+                event.preventDefault();
+                href = $(this).attr('href');
+                var row = $(this).parents('tr').attr('id');
+                $('#modal #modal-title').html("You Sure?");
+                $('#modal #modal-body').html("Are You Sure?");
+                $("#modal").modal('show');
+            });
+            $('#confirm-danger').click(function (event) {
+
+                window.location = href;
+            });
+        });
+    </script>
+    <!-- END PAGE LEVEL JS-->
+@stop

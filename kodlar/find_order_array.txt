@@ -1,0 +1,11 @@
+
+       // $driverArray=Driver::distinct()->select('id')->where('driver_company_id',\Auth::id())->pluck('id');
+
+
+
+      //$jobsArray=Job::distinct()->select('order_id')->wherein('driver_id',$driverArray)->pluck('order_id');
+    $jobsArray=$driverCompany->drivers->jobs ;
+
+
+    dd($jobsArray);
+        $orderArray=Order::distinct()->select('id')->wherein('id',$jobsArray)->pluck('id');

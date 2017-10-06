@@ -1,0 +1,14 @@
+  Route::group(['prefix' => 'company', 'namespace' => 'DriverCompany'], function () {
+
+        Route::get('/', "DriverCompanyController@index")->name('manager.company.index');
+
+        Route::get('/create', 'DriverCompanyController@create')->name('manager.company.create');
+        Route::post('/create', 'DriverCompanyController@create');
+
+        Route::get('/edit/{package_id}', 'DriverCompanyController@edit')->name('manager.company.edit');
+        Route::post('/edit/{package_id}', 'DriverCompanyController@edit');
+
+        Route::get('/delete/{package_id}', 'DriverCompanyController@delete')->name('manager.company.delete');
+
+        Route::get('/profile/{id}', 'DriverCompanyController@profile')->name('manager.company.profile');
+    });

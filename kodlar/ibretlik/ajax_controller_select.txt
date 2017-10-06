@@ -1,0 +1,72 @@
+model :
+
+    public function vehicleclass() {
+
+        return $this->belongsTo('App\Models\VehicleClass', 'vehicle_class_id');
+    }
+
+---------------------
+
+controller :
+
+
+
+	//for ajax
+	public function getmodels(Request $request, $id) {
+      //  return VehicleBrand::with(array('data'=>models.vehicleclass))->find($id);
+        return VehicleModel::where('vehicle_brand_id','=',$id)->with('vehicleclass')->get();
+		//return VehicleBrand::find($id)->models;11
+	}
+
+
+
+------------------------------------------
+view ::
+
+      <select class="form-control" id="brand" name="brand">
+                                                @foreach($brands as $brand)
+                                                    <option value="{{ $brand->id }}"
+                                                            @if($brand->id==old('brand')) selected @endif>
+                                                        {{ $brand->name }}</option>
+                                                @endforeach
+                                            </select>
+
+  <select class="form-control" name="model" id="modelselect">
+                                            </select>
+
+
+
+        $(document).ready(function () {
+
+            $.get('getmodels/' + $('#brand').val(), function (data) {
+
+                var html = "";
+
+                for (var i = 0; i < data.length; i++) {
+
+
+                    html += '<option value="' + data[i].id + '">' + data[i].name +' -  '+ data[i]['vehicleclass']['name'] +
+                        '</option>';
+                }
+
+                $('#modelselect').html(html);
+
+            });
+        });
+
+        $('#brand').on('change', function () {
+
+            $.get('getmodels/' + $('#brand').val(), function (data) {
+                console.log(data);
+                var html = "";
+
+                for (var i = 0; i < data.length; i++) {
+
+                    html += '<option value="' + data[i].id + '">' + data[i].name +' -  '+ data[i]['vehicleclass']['name'] +
+                         '</option>';
+                }
+
+                $('#modelselect').html(html);
+
+            });
+        });

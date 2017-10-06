@@ -25,4 +25,13 @@
                 UserInfo::where('user_id', '=', $user_id)->update(
                     ['photo' => $dosya_adi]
                 );*/
+
+    public function downloadfile($expense_id=0){
+        $expense=Expense::select('expense_document')->find($expense_id);
+        return response()->download($expense->expense_document);
+    }
+
+    ////route
+    Route::get('/downloadfile/{file_id?}', 'PersonelFileController@downloadfile')->name('manager.department.files.downloadfile');
+
 ?>

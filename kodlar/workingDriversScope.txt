@@ -1,0 +1,10 @@
+
+    public function scopeWorkingDrivers($query, $date)
+    {
+       return $query->join('user_works', 'user_works.user_id', '=', 'drivers.user_id')
+            ->where('user_works.start_at', '>=', $date . ' 00:00:00')
+            ->where('user_works.end_at', '<=', $date . ' 23:59:59');
+    }
+
+
+Driver::workingDrivers(date)->get();

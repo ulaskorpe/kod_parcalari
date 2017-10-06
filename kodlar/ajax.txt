@@ -1,0 +1,36 @@
+     <a href="#" onclick="getir();">get</a>
+            <div id="sonuc"></div>
+
+
+
+web.php
+
+Route::get('/deneme/test/{id?}', 'DepartmentController@deneme')->name('manager.department.ajax');
+
+
+script
+
+        function getir() {
+            /// $('#sonuc').html('yok');
+           $.get('{{route('manager.department.ajax',array('id'=>3))}}',function (mdata) {
+               $('#sonuc').html(mdata.response);
+           });
+        }
+
+
+controller
+
+    public function deneme(Request $request,$id=0)
+    {
+        if ($request->isMethod('post')){
+          //  return response()->json(['response' => 'This is post method']);
+           return User::all();
+        }
+         $user = User::where('id','=',$id)->first();
+             $data='bişi';
+           //  foreach($users as $user){
+                $data.=$user->email.':';
+
+           //  }
+        return response()->json(['response' => $data]);
+    }

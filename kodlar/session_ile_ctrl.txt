@@ -1,0 +1,62 @@
+ /*
+
+        if(empty($start_at)){
+            $err='Starting  date cant be empty';
+            Session::put('err',$err);
+            //return redirect()->route('manager.department.work.create',array('user_id'=>$gelenler->input('user_id')));
+            if(empty($gelenler->input('work_id'))) {
+                return redirect()->route('manager.department.work.create', array('user_id' => $gelenler->input('user_id')));
+            }else{
+                return redirect()->route('manager.department.work.edit', array('work_id' => $gelenler->input('work_id')));
+
+            }
+        }
+
+        if(empty($end_at)){
+            $err='Ending  date cant be empty';
+            Session::put('err',$err);
+            if(empty($gelenler->input('work_id'))) {
+                return redirect()->route('manager.department.work.create', array('user_id' => $gelenler->input('user_id')));
+            }else{
+                return redirect()->route('manager.department.work.edit', array('work_id' => $gelenler->input('work_id')));
+
+            }
+        }
+
+        if($start_at>=$end_at){
+            $err='Starting  date cant be greater than ending date';
+            Session::put('err',$err);
+
+            if(empty($gelenler->input('work_id'))) {
+                return redirect()->route('manager.department.work.create', array('user_id' => $gelenler->input('user_id')));
+            }else{
+                return redirect()->route('manager.department.work.edit', array('work_id' => $gelenler->input('work_id')));
+
+            }
+        }
+
+        if(empty($gelenler->input('work_id'))) {
+
+            if ($start_at < Carbon::now()) {
+                $err = 'Starting  date cant be before now';
+                Session::put('err', $err);
+                return redirect()->route('manager.department.work.create', array('user_id' => $gelenler->input('user_id')));
+            }
+
+
+            $varmi = UserWork::whereBetween('start_at', [$start_at, $end_at])->first();
+            if (!empty($varmi->id)) {
+                $err = 'Personel is occupied  between chosen dates';
+                Session::put('err', $err);
+                return redirect()->route('manager.department.work.create', array('user_id' => $gelenler->input('user_id')));
+            }
+        }else{/////update
+            $varmi = UserWork::whereBetween('start_at', [$start_at, $end_at])->where('id','<>',$gelenler->input('work_id'))->first();
+            if (!empty($varmi->id)) {
+                $err = 'Personel is occupied  between chosen dates';
+                Session::put('err', $err);
+                return redirect()->route('manager.department.work.edit', array('work_id' => $gelenler->input('work_id')));
+            }
+
+        }///update
+    session ile ctrl */

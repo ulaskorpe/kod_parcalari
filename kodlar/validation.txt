@@ -1,0 +1,75 @@
+    $this->validate($request, [
+        'title' => 'required|unique:posts|max:255',
+        'body' => 'required',
+    ]);
+
+To retrieve the first error message for a given field, use the first method:
+
+$errors = $validator->errors();
+
+echo $errors->first('email');
+
+
+If you need to retrieve an array of all the messages for a given field, use the get method:
+
+foreach ($errors->get('email') as $message) {
+    //
+}
+
+
+The has method may be used to determine if any error messages exist for a given field:
+
+if ($errors->has('email')) {
+    //
+}
+
+
+$validator = Validator::make($input, $rules, $messages);
+
+$messages = [
+    'email.required' => 'We need to know your e-mail address!',
+];
+
+
+  $kontrol = Validator::make($gelenler->all(),array(
+        'start_at' => 'bail|required|date|after:now',
+        'end_at' => 'required|date|after:start_at',
+        'description' => 'required'
+    ));
+
+
+
+
+
+
+//////////////////////
+
+
+    $messages=[
+
+        'start_at.required'=>'boþ olmuyo',
+        'end_at.required'=>'bitiþ tarihi boþ olmaz',
+        'end_at.after'=>'bitiþ baþlangýçtan önce olmaz'
+        ];
+
+
+    $kontrol = Validator::make($gelenler->all(),array(
+        'start_at' => 'required|date|after:now',
+        'end_at' => 'required|date|after:start_at',
+        'description' => 'required'
+    ),$messages);
+
+
+    if(empty($gelenler->input('work_id'))) {
+        $varmi = UserWork::whereBetween('start_at', [$start_at, $end_at])->first();
+    }else{
+        $varmi = UserWork::whereBetween('start_at', [$start_at, $end_at])->where('id','<>',$gelenler->input('work_id'))->first();
+    }
+    if(!empty($varmi->id)){
+    $kontrol->errors()->add('end_at','There is another work assigned for user between given dates');////custom error msg
+         }
+
+//if($kontrol->fails()){
+if(!empty($kontrol->errors())){
+
+}

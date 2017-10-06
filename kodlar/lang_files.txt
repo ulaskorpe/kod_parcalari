@@ -1,0 +1,13 @@
+https://laravel.com/docs/5.4/localization#retrieving-translation-strings
+
+
+
+config/app.php  içinde  
+
+	'locale' => 'en',
+resource/lang  içinde  en klasörü var, aynı dosyaları içeren  tr  de  ru es   gibi dil klasörleri oluşturulabilir 
+
+
+"You may configure a "fallback language", which will be used when the active language does not contain a given translation string."
+
+'fallback_locale' => 'en',

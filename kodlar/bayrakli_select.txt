@@ -1,0 +1,35 @@
+use App\Models\Country;
+
+controller php
+ $country = Country::all();
+
+['country' => $country]
+html  view
+ <select name="country_id" id="country_id" class="country-codes" required>
+                                                <option></option>
+                                                @foreach($country as $c)
+                                                    <option title="{{ $c->code }}" value="{{ $c->id }}" @if($c->id==old('company_country_id')) selected @endif>
+                                                        {{ $c->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
+
+js view
+
+      function formatState(state) {
+            console.log(state);
+            if (!state.id) {
+                return state.text;
+            }
+            else {
+                var $state = $(
+                    '<span><img src="{{ asset("assets/images/flags") }}/' + state.title.toLowerCase() + '.svg" class="img-flag" /> ' + state.text + '</span>'
+                );
+                return $state;
+            }
+        }
+        $(".country-codes").select2({
+            templateResult: formatState,
+            templateSelection: formatState,
+        });

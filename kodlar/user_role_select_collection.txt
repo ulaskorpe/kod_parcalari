@@ -1,0 +1,5 @@
+        $roles = Role::with('users')->whereIn('name', ['driver', 'driver_company'])->get();
+        $users = new Collection();
+        foreach ($roles as $role) {
+           $users = $users->merge($role->users);
+        }

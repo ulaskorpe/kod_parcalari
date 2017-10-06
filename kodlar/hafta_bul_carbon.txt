@@ -1,0 +1,24 @@
+
+protected function haftaBul(){
+    $now = Carbon::now();
+    $weekStart = $now->startOfWeek()->format('Y/m/d');
+    $weekEnd = $now->endOfWeek()->format('Y/m/d');
+
+    $hafta=array();
+
+    for($i=0;$i<7;$i++){
+        $sonra=$now->startOfWeek()->addDay($i)->format('Y/m/d');
+        $hafta[$i]=$sonra;
+    }
+    //print_r($now->between($weekStart,$weekEnd)->format('Y/m/d'));
+
+
+
+    $msg="";
+    foreach($hafta as $h){
+        $msg.=$h."   ::";
+    }
+
+return $msg;
+
+}

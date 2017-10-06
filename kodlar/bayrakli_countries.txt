@@ -1,0 +1,72 @@
+    'countrycodes' => Cache::run(new PhoneCodeFunc()),
+
+ <div class="row">
+                        <div class="col-md-2">
+                            <label>{{__('clients.country_code')}}</label>
+                            <div class="form-group">
+                                <select name="phone_number_country_code" class="country-codes" id="country-codes" required>
+                                    @foreach($countrycodes as $code=>$number)
+
+
+     <option title="{{ $c->name }}" value="{{ $c->id }}" @if($c->id==old('company_country')) selected @endif>
+                                                        {{ $c->name }}
+                                                    </option>
+
+
+                                        <option title="{{ $code }}" value="{{ $number }}"
+                                                @if($number==old('phone_number_country_code',substr($model->user->gsm_phone,0,strpos($model->user->gsm_phone,'-')))) selected @endif>
+                                            +{{ $number }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label>{{__('clients.telephone')}}</label>
+                            <div class="form-group has-feedback has-icon-left">
+                                <input name="phone_number" class="form-control" id="phone_number" placeholder="" tabindex=""
+                                       value="{{ old('phone_number',substr($model->user->gsm_phone,strpos($model->user->gsm_phone,'-')+1,strlen($model->user->gsm_phone))) }}">
+                                <div class="form-control-position">
+                                    <i class="icon-classictelephone"></i>
+                                </div>
+                                <div class="help-block font-small-3"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="email">{{__('clients.email')}}</label>
+                                <input id="email" class="form-control" placeholder="Email" name="email" value="{{ old('email',$model->user->email) }}" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="password">{{__('clients.password')}}</label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input name="password" id="password" class="form-control" id="password"/>
+                                    <span class="input-group-btn">
+                                        <a href="javascript:addPassword();" class="btn btn-warning" type="button" style="padding-left: 2px;padding-right: 2px;">{{__('clients.generate')}}</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+    function formatState(state) {
+        if (!state.id) {
+            return state.text;
+        }
+        else {
+            var $state = $(
+                '<span><img src="{{ asset("assets/images/flags") }}/' + state.title.toLowerCase() + '.svg" class="img-flag" /> ' + state.text + '</span>'
+            );
+            return $state;
+        }
+    }
+
+    $(".country-codes").select2({
+        templateResult: formatState,
+        templateSelection: formatState,
+    });

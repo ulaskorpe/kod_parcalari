@@ -1,0 +1,42 @@
+namespace App\Helpers\CacheHelper\Functions;
+
+
+use App\Helpers\CacheHelper\CacheFunc;
+use App\Models\Roles;
+//Cache::run(new PhoneCodeFunc())
+
+class DepartmentFunc extends CacheFunc {
+
+    protected function execute() {
+
+        $departments= Roles::where('is_department','=','1')->get();
+
+        return $departments;
+    }
+
+    public function key() {
+
+        return 'departmentList';
+    }
+
+    public function time() {
+
+        return 6000;
+    }
+}
+
+////////////////////////////////////
+
+<?php
+$deps=App\Helpers\CacheHelper\Cache::run(new App\Helpers\CacheHelper\Functions\DepartmentFunc());
+?>
+
+                    @foreach($deps as $dx)
+                        <li data-menu="">
+                            <a href="{{route('manager.department.index',$dx->id)}}" data-toggle="dropdown"
+                               class="dropdown-item">
+                                <i class="icon-books"> </i>
+                                {{$dx->display_name}}
+                            </a>
+                        </li>
+                    @endforeach

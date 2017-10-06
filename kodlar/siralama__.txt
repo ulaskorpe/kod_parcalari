@@ -1,0 +1,22 @@
+update 
+
+                if($firstIndex < $request->input('index')){
+                    VehicleClass::where('id','!=',$VehicleClassModel->id)
+                        ->where('index','<=',$request->input('index'))
+                        ->where ('index','>=',$firstIndex)
+                        ->decrement('index',1);
+                }else if($firstIndex > $request->input('index')){
+                    VehicleClass::where('id','!=',$VehicleClassModel->id)
+                        ->where('index','>=',$request->input('index'))
+                        ->where ('index','<=',$firstIndex)
+                        ->increment('index',1);
+
+                }
+
+
+create 
+ VehicleClass::where('id','<>',$VehicleClassModel->id)->where('index','>=',$request->input('index'))->increment('index');
+
+delete
+
+VehicleClass::where('index','>=',$VehicleClassModel->index)->decrement('index');

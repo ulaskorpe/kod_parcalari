@@ -1,0 +1,283 @@
+@extends('themes.robust.layouts.default')
+
+@section('pageTitle', trans($title))
+@section('metaDescription', '...')
+@section('metaKeywords', '...')
+
+
+@section('cssParts')
+
+@stop
+
+@section('content-body')
+    <div class="col-xs-16">
+        <div class="card-header">
+
+            <h3>{{$title}}</h3>
+        </div>
+        <div class="col-sm-12">
+<div id="sonuc">sonuç:</div>
+            <div id='wrapper'>
+                <div id='myScheduler'></div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+    </div>
+@stop
+
+@section('scriptParts')
+
+
+    <script src="{{ asset('robust-assets/js/aui-min.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ asset('robust-assets/css/bootstrap.min.aui.css') }}"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+        //2017-07-08 13:00:00
+        
+
+        
+        YUI().use(
+            'aui-scheduler',
+            function(Y) {console.log(Y);
+                var events = [
+
+
+                        @foreach($works as $work)
+                    {
+
+
+                        disabled: {{$work['ds']}},
+                        content: '{{$work['desc']}}',
+                        endDate: new Date({{$work['end']}}),
+                        reminder: true,
+                        startDate: new Date({{$work['begin']}})
+                    },
+                        @endforeach
+
+
+                    {
+                        content: 'Reminder',
+                        endDate: new Date(2099, 1, 4, 4),
+                        reminder: true,
+                        startDate: new Date(2099, 1, 4, 0)
+                    }
+                ];
+
+                var agendaView = new Y.SchedulerAgendaView();
+                var dayView = new Y.SchedulerDayView();
+
+
+             var olayKaydet = new Y.SchedulerEventRecorder({
+                    on: {
+                        save: function (event) {
+                          var instant = this;
+                            data= { "content": this.getContentNode().val(),
+                                "startDate": new Date( this.get('startDate') ),
+                                "endDate": new Date( this.get('endDate') ).getTime() / 1000 };
+                            console.log(data);
+                            $.get('{{route('manager.department.ajax',array('data'=>))}}',function (mdata) {
+                                $('#sonuc').html(mdata);
+                            });
+
+
+                         /*  $.ajax({
+                                type: "POST",
+                                url:'/event',
+
+                                datatype: "json",
+                                success: function (output) {
+                                   output = JSON.parse($.trim(output));
+                                    instant.addAttr("eventid", {
+                                        value: output.data.EV_ID,
+
+                                        setter: function(val) {
+                                            return output.data.EV_ID;
+                                        },
+
+                                        validator: function(val) {
+                                            return Y.Lang.isNumber(val);
+                                        }
+                                    });
+
+                                }
+
+
+                            });
+                          function getir() {
+                          /// $('#sonuc').html('yok');
+
+                             }
+
+                            */
+
+
+                        // console.log(event);
+                            //alert(instant.data['content']);
+                        },
+                        edit: function (event) {
+                            var instance = this;
+                            console.log(instance.getAttrs()); // returns a list of attributes, eventid is not among them
+                            console.log(instance.get("eventid")); // returns undefined
+                            self.schedule.getEvents()[0].get( "eventid" ) // returns undefined
+                        },
+                        delete: function( event ) {
+                            //    console.log(event);
+                        }
+                    }
+
+
+                });
+                var monthView = new Y.SchedulerMonthView();
+                var weekView = new Y.SchedulerWeekView();
+
+                <?php
+
+                    $ay=intval(date('m'))-1;
+
+                    ?>
+
+                    new Y.Scheduler(
+                    {
+                        activeView: weekView,
+                        boundingBox: '#myScheduler',
+                        date: new Date(<?=date('Y')?>,<?=$ay?>,<?=date('d')?>),
+                        eventRecorder: olayKaydet,
+                        items: events,
+                        render: true,
+                        views: [dayView, weekView, monthView, agendaView]
+                    }
+
+
+                );
+            }
+
+
+
+        );
+
+
+
+        /* YUI().use('aui-io-request', function(A){
+         alert('ok');
+
+         });
+
+         A.io.request('test.html');*/
+    </script>
+
+    <script src="{{ asset('robust-assets/js/plugins/pickers/dateTime/moment-with-locales.min.js') }}"
+            type="text/javascript"></script>
+    <script src="{{ asset('robust-assets/js/plugins/pickers/dateTime/bootstrap-datetimepicker.min.js') }}"
+            type="text/javascript"></script>
+
+
+    <script type="text/javascript">
+
+/*
+        function Schedule( boundingbox, events )
+        {
+            var self = this;
+            this.schedule = null;
+            this.events = events || [];
+            this.boundingbox = boundingbox || "";
+
+           // console.log( self.events );
+
+            YUI({ lang: 'nl-NL' }).use(
+                'aui-scheduler',
+                function (Y) {
+                    console.log(Y);
+                    var events = self.events;
+
+                    var dayView = new Y.SchedulerDayView({ isoTime: true });
+                    var weekView = new Y.SchedulerWeekView({ isoTime: true });
+                    var monthView = new Y.SchedulerMonthView({ isoTime: true });
+
+                    var eventRecorder = new Y.SchedulerEventRecorder({
+                        on: {
+                            save: function (event) {
+                                var instant = this;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/EventHandler",
+                                    data: { "content": this.getContentNode().val(),
+                                        "startDate": new Date( this.get('startDate') ).getTime() / 1000,
+                                        "endDate": new Date( this.get('endDate') ).getTime() / 1000 },
+                                    datatype: "json",
+                                    success: function (output) {
+                                        output = JSON.parse($.trim(output));
+                                        instant.addAttr("eventid", {
+                                            value: output.data.EV_ID,
+
+                                            setter: function(val) {
+                                                return output.data.EV_ID;
+                                            },
+
+                                            validator: function(val) {
+                                                return Y.Lang.isNumber(val);
+                                            }
+                                        });
+                                    }
+                                });
+                            },
+                            edit: function (event) {
+                                var instance = this;
+                                console.log(instance.getAttrs()); // returns a list of attributes, eventid is not among them
+                                console.log(instance.get("eventid")); // returns undefined
+                                self.schedule.getEvents()[0].get( "eventid" ) // returns undefined
+                            },
+                            delete: function( event ) {
+
+                            }
+                        }
+                    });
+
+                    self.schedule = new Y.Scheduler({
+                        strings: { agenda: 'Agenda', day: 'Dag', month: 'Maand', today: 'Vandaag', week: 'Week', year: 'Jaar',  'description-hint': "Een nieuwe afspraak" },
+                        activeView: weekView,
+                        boundingBox: self.boundingbox,
+                        date: new Date(),
+                        eventRecorder: eventRecorder,
+                        firstDayOfWeek: 1,
+                        items: self.events,
+                        render: true,
+                        views: [dayView, weekView, monthView]
+                    });
+
+
+                    $.each( self.schedule.getEvents(), function( key, value ) {
+                        value.addAttr( "eventid", {
+                            value: 123,
+
+                            setter: function(val) {
+                                return 123;
+                            },
+
+                            validator: function(val) {
+                                return Y.Lang.isNumber(val);
+                            }
+                        });
+                    } );
+
+                    console.log(self.schedule.getEvents() ); // returns an array of events
+                    console.log( self.schedule.getEvents()[0].get( "eventid" ) ); // returns the eventid: 123
+                }
+            );
+        }
+
+        $.get('/deneme/test', function(){
+            console.log('response');
+        });
+
+        */
+        /////newSchedulerEvent.set("eventid", output.data.EV_ID);
+     //   $("#start_at").datetimepicker();
+
+      //  $("#end_at").datetimepicker();
+    </script>
+@stop

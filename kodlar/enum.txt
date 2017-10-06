@@ -1,0 +1,7 @@
+     <select name="status" id="status" class="form-control" onchange="userStatus('{{$task->id}}',this.value);">
+                                    <option value="{{Enum\TaskStatuses::OPEN_TASKS}}" @if($status==Enum\TaskStatuses::OPEN_TASKS) selected @endif >{{__('Tasks.all_users')}}</option>
+                                    <option value="{{Enum\TaskStatuses::COMPLETED}}" @if($status==Enum\TaskStatuses::COMPLETED) selected @endif>{{__('Tasks.completed_users')}}</option>
+                                    <option value="{{Enum\TaskStatuses::IN_PROGRESS}}" @if($status==Enum\TaskStatuses::IN_PROGRESS) selected @endif>{{__('Tasks.in_progress_users')}}</option>
+                                    <option value="{{Enum\TaskStatuses::TODO}}" @if($status==Enum\TaskStatuses::TODO) selected @endif>{{__('Tasks.to_do_users')}}</option>
+                                    <option value="{{Enum\TaskStatuses::CANCELLED}}" @if($status==Enum\TaskStatuses::CANCELLED) selected @endif>{{__('Tasks.cancelled_users')}}</option>
+                                </select>
