@@ -24,8 +24,8 @@
         Route::get('/getextras/{order_id}', 'OrderController@getextras');
         Route::get('/deletepassenger/{passenger_id}', 'OrderController@deletepassenger');
         Route::get('/deleteorderextra/{id}', 'OrderController@deleteorderextra');
-        Route::get('/getpricesummary', 'OrderController@getpricesummary');
-        Route::post('/getpricesummary', 'OrderController@getpricesummary');
+ //       Route::get('/getpricesummary', 'OrderController@getpricesummary');
+  //      Route::post('/getpricesummary', 'OrderController@getpricesummary');
         Route::get('/sockettimetable', 'OrderController@sockettimetable');
         Route::get('/get_clients/{company_id?}/{department_id?}', 'OrderController@getClients');
         Route::get('/get_companies/{client_id?}', 'OrderController@getCompanies');
