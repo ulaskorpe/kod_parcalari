@@ -1,0 +1,27 @@
+doğru format
+
+[{"address_components":[{"long_name":"Favoriten","short_name":"Favoriten","types":["political","sublocality","sublocality_level_1"]},{"long_name":"Vienna","short_name":"Vienna","types":["locality","political"]},{"long_name":"Vienna","short_name":"Vienna","types":["administrative_area_level_1","political"]},{"long_name":"Austria","short_name":"AT","types":["country","political"]}],"formatted_address":"Favoriten, Vienna, Austria","geometry":{"bounds":{"northeast":{"lat":48.1879198,"lng":16.4371553},"southwest":{"lat":48.1178444,"lng":16.3332549}},"location":{"lat":48.1604766,"lng":16.3819909},"location_type":"APPROXIMATE","viewport":{"northeast":{"lat":48.1879198,"lng":16.4371553},"southwest":{"lat":48.1178444,"lng":16.3332549}}},"partial_match":true,"place_id":"ChIJ1enZ4YgHbUcR59kO2oYuir8","types":["political","sublocality","sublocality_level_1"]}]
+
+{"lat":"48.1604766","lon":"16.3819909"}
+
+
+[{"address_components":[{"long_name":"Favoriten","short_name":"Favoriten","types":["political","sublocality","sublocality_level_1"]},{"long_name":"Vienna","short_name":"Vienna","types":["locality","political"]},{"long_name":"Vienna","short_name":"Vienna","types":["administrative_area_level_1","political"]},{"long_name":"Austria","short_name":"AT","types":["country","political"]}],"formatted_address":"Favoriten, Vienna, Austria","geometry":{"bounds":{"northeast":{"lat":48.1879198,"lng":16.4371553},"southwest":{"lat":48.1178444,"lng":16.3332549}},"location":{"lat":48.1604766,"lng":16.3819909},"location_type":"APPROXIMATE","viewport":{"northeast":{"lat":48.1879198,"lng":16.4371553},"southwest":{"lat":48.1178444,"lng":16.3332549}}},"partial_match":true,"place_id":"ChIJ1enZ4YgHbUcR59kO2oYuir8","types":["political","sublocality","sublocality_level_1"]}]
+
+
+{"lat":48.1604766,"lon":null}
+
+
+
+[{"address_components":[{"long_name":"Favoriten","short_name":"Favoriten","types":["political","sublocality","sublocality_level_1"]},{"long_name":"Vienna","short_name":"Vienna","types":["locality","political"]},{"long_name":"Vienna","short_name":"Vienna","types":["administrative_area_level_1","political"]},{"long_name":"Austria","short_name":"AT","types":["country","political"]}],"formatted_address":"Favoriten, Vienna, Austria","geometry":{"bounds":{"northeast":{"lat":48.1879198,"lng":16.4371553},"southwest":{"lat":48.1178444,"lng":16.3332549}},"location":{"lat":48.1604766,"lng":16.3819909},"location_type":"APPROXIMATE","viewport":{"northeast":{"lat":48.1879198,"lng":16.4371553},"southwest":{"lat":48.1178444,"lng":16.3332549}}},"partial_match":true,"place_id":"ChIJ1enZ4YgHbUcR59kO2oYuir8","types":["political","sublocality","sublocality_level_1"]}]
+
+{"lat":48.1604766,"lng":16.3819909}
+
+
+{"lat":48.1604766,"lon":16.381990900000005}
+
+
+
+
+[{"address_components":[{"long_name":"Sahibzada Ajit Singh Nagar","short_name":"SAS Nagar","types":["locality","political"]},{"long_name":"Chandigarh","short_name":"Chandigarh","types":["administrative_area_level_2","political"]},{"long_name":"Chandigarh","short_name":"Chandigarh","types":["administrative_area_level_1","political"]},{"long_name":"India","short_name":"IN","types":["country","political"]}],"formatted_address":"Sahibzada Ajit Singh Nagar, Chandigarh, India","geometry":{"bounds":{"northeast":{"lat":30.7514252,"lng":76.7579126},"southwest":{"lat":30.6452228,"lng":76.6368483}},"location":{"lat":30.7046486,"lng":76.71787259999999},"location_type":"APPROXIMATE","viewport":{"northeast":{"lat":30.7514252,"lng":76.7579126},"southwest":{"lat":30.6452228,"lng":76.6368483}}},"place_id":"ChIJH_imbZDuDzkR2AjlbPGYKVE","types":["locality","political"]}]
+
+{"lat":30.7046486,"lon":null}
