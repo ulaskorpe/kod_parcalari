@@ -32,13 +32,9 @@ myLatLng = new google.maps.LatLng({lat: 48.1604766, lng: 16.381990900000005});
   callback(my_number);
 }
 // call the function
-some_function(5, 15, function(num) {
-  // this anonymous function will run when the
-  // callback is called
-  console.log("callback called! " + num);
-});
+some_function(5, 15, abc(param));
 
 
 function abc(param){
- console.log("callback called! " + num);
+ console.log("callback called! " + param);
 }
