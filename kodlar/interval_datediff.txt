@@ -1,3 +1,14 @@
   $interval = date_diff(date_create(), date_create('1978-06-27 04:30:00'));
     //echo $interval->format("You are  %Y Year, %M Months, %d Days, %H Hours, %i Minutes, %s Seconds Old");
     echo $interval->format(" %H Hours ");
+
+      $interval = date_diff(date_create(), date_create('1978-06-27 04:30:00'));
+    //echo $interval->format("You are  %Y Year, %M Months, %d Days, %H Hours, %i Minutes, %s Seconds Old");
+    echo $interval->format(" %H Hours ");
+      $interval = date_diff(date_create(), date_create('1978-06-27 04:30:00'));
+    //echo $interval->format("You are  %Y Year, %M Months, %d Days, %H Hours, %i Minutes, %s Seconds Old");
+    echo $interval->format(" %H Hours ");
+
+      $interval = date_diff(date_create(), date_create('1978-06-27 04:30:00'));
+    //echo $interval->format("You are  %Y Year, %M Months, %d Days, %H Hours, %i Minutes, %s Seconds Old");
+    echo $interval->format(" %H Hours ");
