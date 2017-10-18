@@ -1,3 +1,8 @@
+
+google asks place with key 
+
+<script>
+
             $.ajax({
                 url:'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='+term+'&key={{env('GOOGLE_API_KEY')}}',
                 dataType: 'json', // Notice! JSONP <-- P (lowercase)
@@ -10,3 +15,5 @@
                     alert("Error");
                 }
             });
+
+            </script>
