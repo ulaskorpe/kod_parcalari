@@ -1,0 +1,12 @@
+@if($errors->has('files'))
+                                            {{ $errors->first($alan) }}
+                                        @endif
+                                        {!! $errors->getBag('')->first('files', '<p class="tag-default tag-danger block-tag text-xs-right"><small class="block-area white">:message</small></p>') !!}
+
+
+
+ @if($errors->has('description'))
+                                            {{ $errors->first($alan) }}
+                                        @endif
+                                        {!! $errors->getBag('kontrol')->first('description', '<p class="tag-default tag-danger block-tag text-xs-right"><small class="block-area white">:message</small></p>') !!}
+                                    

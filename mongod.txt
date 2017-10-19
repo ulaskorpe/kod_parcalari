@@ -1,0 +1,28 @@
+/*
+Kaynak:
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+http://php.net/manual/en/mongodb.installation.pecl.php
+
+1. sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+2. echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+3. sudo apt-get update
+4. sudo apt-get install -y mongodb-org
+    4.1 sudo mkdir /data
+    4.2 sudo mkdir /data/db
+    4.3 sudo chmod 777 /data
+    4.4 sudo chmod 777 /data/db
+    4.5 sudo chmod 777 /var/log/mongodb/
+
+5.    systemctl enable mongod
+6. mongod --fork --logpath /var/log/mongodb/mongod.log  // mongod --auth --fork --logpath /var/log/mongodb/mongod.log
+		# pm2 start server.js --name="intersprint-socket" # 
+		
+7. sudo apt-get install pkg-config
+8. sudo pecl install mongodb
+9. add extension=mongodb.so in fpm and cli:
+    9.1 sudo nano /etc/php/7.1/fpm/conf.d/30-mongodb.ini
+    9.2 sudo nano /etc/php/7.1/cli/conf.d/30-mongodb.ini
+10. Restart service:
+    10.1 sudo systemctl restart php7.1-fpm
+    10.2 sudo systemctl reload nginx
+*/

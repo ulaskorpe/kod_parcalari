@@ -1,0 +1,18 @@
+#VehicleClass#   order created for client , #CustomerName# 
+date : #OrderDate# 
+number :#OrderNumber# 
+start at : #StartTime# 
+kostenstelle : #Kostenstelle# 
+from : #From#   
+to : #To#
+
+
+job status changed
+customer name : #CustomerName# 
+date : #OrderDate# 
+order number :#OrderNumber# 
+start : #StartTime# 
+kostenstelle : #Kostenstelle# 
+vehicle : #VehicleClass# 
+from : #From# 
+to : #To# 
