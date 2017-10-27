@@ -1,9 +1,9 @@
-   <select name="status" id="status" class="form-control" onchange="getTodo(this.value)">
-                            <option value="">{{__('Tasks.select_status')}}</option>
-                            @foreach(\Enum\TaskStatuses::getListUcfirst() as $key=>$string)
-                                <option value="{{$key}}" @if($status_ctrl==$key) selected @endif>{{__('Tasks.status_'.$string)}}</option>
-                            @endforeach
-                        </select>
+       <select name="status" id="status" class="form-control" onchange="getTodo(this.value)">
+                                <option value="">{{__('Tasks.select_status')}}</option>
+                                @foreach(\Enum\TaskStatuses::getListUcfirst() as $key=>$string)
+                                    <option value="{{$key}}" @if($status_ctrl==$key) selected @endif>{{__('Tasks.status_'.$string)}}</option>
+                                @endforeach
+                            </select>
 
                         @foreach(\Enum\TaskStatuses::getListUcfirst() as $key=>$string)
 
