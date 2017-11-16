@@ -9,3 +9,6 @@
             $Log["driver_id"] = $Driver->id;
             $Log["is_online"] = $Driver->is_online;
             $Log->save();
+
+
+            Method App\Models\ClientCompanyDepartment::__toString() must not throw an exception, caught Illuminate\Database\Eloquent\JsonEncodingException: Error encoding model [App\Models\ClientCompanyDepartment] with ID [] to JSON: Recursion detected
