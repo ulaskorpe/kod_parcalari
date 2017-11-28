@@ -121,3 +121,32 @@
                                     </div>
                                 </div>
                             </div>
+recourse update 
+
+                                      <div class="col-md-1">
+                                <label>{{__('clients.country_code')}}</label>
+                                <div class="form-group">
+                                    <select name="phone_code" class="country-codes"
+                                            id="phone_code" required>
+                                        @foreach($countrycodes as $code=>$number)
+                                            <option title="{{ $code }}"
+                                                    value="{{ $number }}"
+                                                    @if($number==old('phone_code',substr($recourse->phone,0,strpos($recourse->phone,'-')))) selected @endif>
+                                                +{{ $number }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label>{{__('clients.backup_first_phone')}}</label>
+                                <div class="form-group has-feedback has-icon-left">
+                                    <input name="phone_number" class="form-control" id="phone_number"
+                                           placeholder="" tabindex="" required
+                                           value="{{ old('phone_number',substr($recourse->phone,strpos($recourse->phone,'-')+1,strlen($recourse->phone))) }}">
+                                    <div class="form-control-position">
+                                        <i class="icon-classictelephone"></i>
+                                    </div>
+                                    <div class="help-block font-small-3"></div>
+                                </div>
+                            </div>
