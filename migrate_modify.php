@@ -20,3 +20,22 @@
                             ,"companyname"=>       __("expenses.table_expense_belongs_to")
                             ,"date"=>              __("expenses.table_expense_date")
                             ,"last_updatedby"=>    __("expenses.table_expense_created_by")
+
+
+
+ <!--
+                                    <a href="#">
+                                        <button type="button" class="btn btn-blue btn-sm" onclick="showClients({{$vehicle->id}})"><i class="icon-people white"></i>
+                                            {{__('vehicles.clients')}}
+                                        </button>
+                                    </a>
+                                    <a href="#">
+                                        <button type="button" class="btn btn-green btn-sm" onclick="showExpenses({{$vehicle->id}})"><i class="icon-coin-euro white"></i>
+                                            {{__('vehicles.expenses')}}
+                                        </button>
+                                    </a>
+                                    <a href="#">
+                                        <button type="button" class="btn btn-warning btn-sm" onclick="showOrders({{$vehicle->id}})"><i class="icon-map-signs white"></i>
+                                            {{__('vehicles.orders')}}
+                                        </button>
+                                    </a>-->                            
